@@ -117,7 +117,7 @@ export const HiddenField = ({
                     d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12V20H12H1V12Z"
                     fill="#D9D9D9"
                     stroke="black"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke-linejoin="round"
                   />
                 </mask>
@@ -133,7 +133,7 @@ export const HiddenField = ({
                 className={`lid lid--upper ${!visible ? 'hidden' : ''}`}
                 d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12"
                 stroke="currentColor"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
@@ -141,7 +141,7 @@ export const HiddenField = ({
                 className="lid lid--lower"
                 d="M1 12C1 12 5 20 12 20C19 20 23 12 23 12"
                 stroke="currentColor"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
