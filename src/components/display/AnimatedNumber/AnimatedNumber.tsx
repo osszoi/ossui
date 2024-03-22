@@ -1,3 +1,4 @@
+import React from 'react';
 import './style.css';
 
 interface Props {
@@ -17,13 +18,16 @@ export const AnimatedNumber = ({
     digits.unshift(0);
   }
 
+  const style = { fontSize, height: fontSize };
+
+  console.log({ style });
+
   return (
     <div className="number-container">
       {digits.map((digit, k) => (
         <div
           className="digit"
-          // @ts-expect-error: css var
-          style={{ '--digit-size': fontSize }}>
+          style={style}>
           <div
             className="digit__track"
             style={{ transform: `translateY(-${digit}0%)` }}>
@@ -37,8 +41,7 @@ export const AnimatedNumber = ({
                         ? 'visible'
                         : 'hidden'
                       : 'visible',
-                  // @ts-expect-error: css var
-                  '--digit-size': fontSize
+                  ...style
                 }}>
                 {i}
               </div>

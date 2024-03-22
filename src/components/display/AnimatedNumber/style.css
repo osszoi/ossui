@@ -4,11 +4,11 @@
 
 .digit {
   width: 1ch;
-  height: var(--digit-size);
+  /* height: var(--digit-size); */
   overflow: hidden;
   display: inline-block;
   margin: 0 auto;
-  font-size: var(--digit-size);
+  /* font-size: var(--digit-size); */
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
 }
