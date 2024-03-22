@@ -1,0 +1,220 @@
+@import '../../../styles/base.css';
+
+:root {
+  --card-button-hover-bg-color: hsl(0 0% 95%);
+  --button-shade: 80%;
+  --card-font-size: 1rem;
+  --card-icon-size: calc(var(--card-font-size) + 30px);
+
+  --glint: hsl(0 0% 8%);
+}
+
+.credit-card {
+  color: var(--color);
+  background: transparent;
+  position: relative;
+  display: flex;
+
+  /* transition:
+    border-color 0.2s,
+    color 0.2s; */
+
+  justify-content: space-between;
+}
+
+.card {
+  font-size: var(--card-font-size);
+  display: flex;
+  height: var(--card-icon-size);
+  padding-inline: var(--card-font-size);
+  color: var(--color);
+  overflow: hidden;
+  /* font-family: 'Consolas'; */
+  font-variant: tabular-nums;
+}
+
+.card__char {
+  position: relative;
+  width: 1ch;
+  flex: 1;
+}
+
+.card__char span {
+  position: absolute;
+  inset: 0;
+  display: inline-block;
+  height: 100%;
+  line-height: var(--card-icon-size);
+}
+
+[data-visible='true'] {
+  --visible: 1;
+}
+
+.card__char:not(.card__char--static) span {
+  --offset: 5%;
+  --transition: 0.115;
+  --speed: calc(var(--transition) * 4);
+  --delay: calc(sin((var(--index) / 12) * 45deg) * var(--speed) * 1s);
+  transition-property: translate, opacity, scale;
+  transition-duration: calc(var(--transition) * 1s);
+  transition-delay: var(--delay);
+  transition-timing-function: cubic-bezier(0.51, 0.77, 0.88, 1.23);
+}
+
+.card__char:not(.card__char--static) span:last-of-type {
+  transform-origin: 50% 0;
+  translate: 0 calc((var(--offset) * -1) + (var(--visible, 0) * var(--offset)));
+  scale: calc(0.625 + (var(--visible, 0) * 0.375));
+  opacity: var(--visible, 0);
+}
+
+.card__char:not(.card__char--static) span:first-of-type {
+  translate: 0 calc(var(--visible, 0) * var(--offset));
+  transform-origin: 50% 100%;
+  scale: calc(1 - (var(--visible, 0) * 0.375));
+  opacity: calc(1 - var(--visible, 0));
+}
+
+label {
+  --p-x: 0.7rem;
+
+  position: absolute;
+  color: var(--color);
+  top: -0.6rem;
+  left: var(--p-x);
+  letter-spacing: 0.2ch;
+  transition: color 0.2s;
+  font-size: 0.875rem;
+  background-color: white;
+  padding-inline: 0.3rem;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: calc(100% - 3 * var(--p-x));
+}
+
+.eye circle:nth-of-type(2) {
+  fill: var(--glint);
+}
+
+button {
+  padding: 0;
+  display: grid;
+  place-items: center;
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 0;
+  background: transparent;
+  border: 4px solid transparent;
+  transition: background 0.125s;
+  color: var(--color);
+  cursor: pointer;
+  outline: 0;
+  height: var(--card-icon-size);
+}
+
+button:hover {
+  background: linear-gradient(
+      var(--card-button-hover-bg-color),
+      var(--card-button-hover-bg-color)
+    )
+    padding-box;
+}
+
+.credit-card__actions {
+  /*	position: absolute;*/
+  right: 0;
+  z-index: 2;
+  top: 50%;
+  display: flex;
+  height: 100%;
+  color: var(--color);
+}
+
+button:is(:focus-visible, :hover) {
+  --active: 1;
+}
+
+button svg {
+  width: 75%;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.clipboard {
+  overflow: visible !important;
+}
+
+.clipboard > path {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.clipboard__check {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.2s;
+}
+
+[data-copied='true'] .clipboard__check {
+  transition: stroke-dashoffset 0.2s 0.2s;
+}
+
+.clipboard__board {
+  rotate: 5deg;
+  translate: calc(20% + (var(--active, 0) * -5%)) -8%;
+  /* fill: var(--card-bg); */
+}
+
+.clipboard__paper {
+  /* fill: var(--card-bg); */
+  translate: calc(-50% + (var(--active, 0) * 25%))
+    calc(25% - (var(--active, 0) * 10%));
+  rotate: -5deg;
+}
+
+:is(.clipboard__paper, .clipboard__board) {
+  transition:
+    translate 0.2s,
+    rotate 0.2s;
+}
+
+button:is(:hover, :focus-visible) :is(.clipboard__paper, .clipboard__board) {
+  fill: var(--card-button-hover-bg-color);
+}
+
+[data-copied='true'] :is(.clipboard__paper, .clipboard__board) {
+  translate: 0 0;
+  rotate: 0deg;
+}
+
+[data-copied='true'] .clipboard__check {
+  stroke-dashoffset: 0;
+}
+
+.lid--upper {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  opacity: 1;
+
+  transform-origin: center;
+}
+
+.lid--upper.hidden {
+  opacity: 0;
+  transform: rotateX(180deg);
+}

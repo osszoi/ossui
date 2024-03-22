@@ -1,0 +1,95 @@
+button {
+  padding: 0;
+  display: grid;
+  place-items: center;
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 0;
+  background: transparent;
+  border: 4px solid transparent;
+  transition: background 0.125s;
+  color: var(--card-color);
+  cursor: pointer;
+  outline: 0;
+  height: var(--card-icon-size);
+}
+
+button:hover {
+  background: linear-gradient(
+      var(--card-button-hover-bg-color),
+      var(--card-button-hover-bg-color)
+    )
+    padding-box;
+}
+
+button:is(:focus-visible, :hover) {
+  --active: 1;
+}
+
+button svg {
+  width: 75%;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.clipboard {
+  overflow: visible !important;
+}
+
+.clipboard > path {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.clipboard__check {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.2s;
+}
+
+[data-copied='true'] .clipboard__check {
+  transition: stroke-dashoffset 0.2s 0.2s;
+}
+
+.clipboard__board {
+  rotate: 5deg;
+  translate: calc(20% + (var(--active, 0) * -5%)) -8%;
+  fill: var(--card-bg);
+}
+
+.clipboard__paper {
+  fill: var(--card-bg);
+  translate: calc(-50% + (var(--active, 0) * 25%))
+    calc(25% - (var(--active, 0) * 10%));
+  rotate: -5deg;
+}
+
+:is(.clipboard__paper, .clipboard__board) {
+  transition:
+    translate 0.2s,
+    rotate 0.2s;
+}
+
+button:is(:hover, :focus-visible) :is(.clipboard__paper, .clipboard__board) {
+  fill: var(--card-button-hover-bg-color);
+}
+
+[data-copied='true'] :is(.clipboard__paper, .clipboard__board) {
+  translate: 0 0;
+  rotate: 0deg;
+}
+
+[data-copied='true'] .clipboard__check {
+  stroke-dashoffset: 0;
+}
