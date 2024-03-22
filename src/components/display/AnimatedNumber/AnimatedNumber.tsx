@@ -7,20 +7,16 @@ interface Props {
   maxDigits?: number;
 }
 
-export const AnimatedNumber = ({
-  n,
-  fontSize = '72px',
-  maxDigits = 2
-}: Props) => {
+export const AnimatedNumber = ({ n, fontSize = '72px', maxDigits }: Props) => {
   const digits = n.toString().split('').map(Number);
 
-  while (digits.length < maxDigits) {
-    digits.unshift(0);
+  if (maxDigits) {
+    while (digits.length < maxDigits) {
+      digits.unshift(0);
+    }
   }
 
   const style = { fontSize, height: fontSize };
-
-  console.log({ style });
 
   return (
     <div className="number-container">
@@ -37,11 +33,17 @@ export const AnimatedNumber = ({
                 style={{
                   visibility:
                     i === 0
-                      ? maxDigits - k <= n.toString().length
+                      ? (maxDigits || n.toString().length) - k <=
+                        n.toString().length
                         ? 'visible'
                         : 'hidden'
                       : 'visible',
-                  ...style
+                  ...style,
+                  ...(i === digit
+                    ? {
+                        opacity: 1
+                      }
+                    : { opacity: 0.4 })
                 }}>
                 {i}
               </div>
