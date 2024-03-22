@@ -1,4 +1,11 @@
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('https://assets.codepen.io/605876/GeistMonoVariableVF.ttf')
+    format('truetype');
+}
+
 :root {
   --body-bg: white;
   --color: hsl(0 0 5%);
+  font-family: 'Geist Mono', sans-serif, system-ui;
 }

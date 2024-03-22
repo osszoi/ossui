@@ -9,6 +9,7 @@ interface Props {
   noBorder?: boolean;
   hideEye?: boolean;
   value: any;
+  children?: React.ReactNode;
 }
 
 export const HiddenField = ({
@@ -18,7 +19,8 @@ export const HiddenField = ({
   width = '100%',
   noBorder,
   hideEye,
-  value
+  value,
+  children
 }: Props) => {
   const eye = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -166,6 +168,7 @@ export const HiddenField = ({
             <span className="sr-only">Reveal</span>
           </button>
         )}
+        {children}
       </div>
     </div>
   );

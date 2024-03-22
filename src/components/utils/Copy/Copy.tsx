@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './style.css';
 
 const copyToClipboard = async (value) => {
@@ -9,7 +9,13 @@ const copyToClipboard = async (value) => {
   }
 };
 
-export const Copy = ({ value, tooltip = '', onClick }) => {
+interface Props {
+  value: string;
+  tooltip?: string;
+  onClick?: () => void;
+}
+
+export const Copy = ({ value, tooltip = '', onClick }: Props) => {
   const [copied, setCopied] = useState(false);
   const copyClear = useRef<any>(null);
 
