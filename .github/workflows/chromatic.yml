@@ -11,6 +11,8 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Upgrade Yarn
+        run: npm upgrade yarn
       - name: Install dependencies
         # ⚠️ Pick one of these, matching the package manager for your project
         run: yarn install --immutable --immutable-cache --check-cache
